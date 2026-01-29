@@ -294,6 +294,79 @@
             opacity: 1;
             transform: scale(1);
         }
+
+        /* Magnetic Button Effects */
+        .magnetic-btn {
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .magnetic-btn::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .magnetic-btn:active::after {
+            width: 300px;
+            height: 300px;
+        }
+
+        /* Ripple Effect */
+        .ripple {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.6);
+            transform: scale(0);
+            animation: ripple-animation 0.6s ease-out;
+            pointer-events: none;
+        }
+
+        @keyframes ripple-animation {
+            to {
+                transform: scale(4);
+                opacity: 0;
+            }
+        }
+
+        /* Button Glow on Hover */
+        .glow-btn {
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .glow-btn::before {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            border-radius: inherit;
+            background: linear-gradient(45deg, #ffffff, #b8b8b8, #ffffff);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: -1;
+            filter: blur(10px);
+        }
+
+        .glow-btn:hover::before {
+            opacity: 0.5;
+        }
+
+        /* Morphing Button */
+        .morph-btn {
+            transition: border-radius 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        .morph-btn:hover {
+            border-radius: 2rem;
+        }
     </style>
 </head>
 
@@ -372,12 +445,12 @@
                 <!-- Actions -->
                 <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
                     <a href="#contact"
-                        class="flex items-center justify-center gap-2 w-full sm:w-auto px-8 py-4 bg-white text-black rounded-lg font-semibold shadow-lg hover:shadow-xl hover:bg-gray-200 transition-all duration-300">
+                        class="magnetic-btn glow-btn morph-btn flex items-center justify-center gap-2 w-full sm:w-auto px-8 py-4 bg-white text-black rounded-lg font-semibold shadow-lg hover:shadow-xl hover:bg-gray-200 transition-all duration-300">\n
                         Get Started
                         <i data-lucide="chevron-right" class="w-4 h-4"></i>
                     </a>
                     <a href="#process"
-                        class="w-full sm:w-auto px-8 py-4 text-white rounded-lg font-semibold shadow-sm hover:shadow-md hover:bg-white/5 transition-all duration-300">
+                        class="magnetic-btn morph-btn w-full sm:w-auto px-8 py-4 text-white rounded-lg font-semibold shadow-sm hover:shadow-md hover:bg-white/5 transition-all duration-300">
                         How We Work
                     </a>
                 </div>
@@ -959,6 +1032,75 @@
                 submitBtn.innerHTML = originalBtnContent;
             }
         });
+
+        /* =========================================
+           MAGNETIC BUTTON EFFECTS (GSAP)
+           ========================================= */
+
+        const magneticButtons = document.querySelectorAll('.magnetic-btn');
+
+        magneticButtons.forEach(button => {
+            button.addEventListener('mousemove', (e) => {
+                const rect = button.getBoundingClientRect();
+                const x = e.clientX - rect.left - rect.width / 2;
+                const y = e.clientY - rect.top - rect.height / 2;
+
+                // Magnetic pull effect (max 20px movement)
+                gsap.to(button, {
+                    x: x * 0.3,
+                    y: y * 0.3,
+                    duration: 0.3,
+                    ease: 'power2.out'
+                });
+            });
+
+            button.addEventListener('mouseleave', () => {
+                // Return to original position
+                gsap.to(button, {
+                    x: 0,
+                    y: 0,
+                    duration: 0.5,
+                    ease: 'elastic.out(1, 0.5)'
+                });
+            });
+
+            // Ripple effect on click
+            button.addEventListener('click', function (e) {
+                const ripple = document.createElement('span');
+                ripple.classList.add('ripple');
+
+                const rect = this.getBoundingClientRect();
+                const size = Math.max(rect.width, rect.height);
+                const x = e.clientX - rect.left - size / 2;
+                const y = e.clientY - rect.top - size / 2;
+
+                ripple.style.width = ripple.style.height = size + 'px';
+                ripple.style.left = x + 'px';
+                ripple.style.top = y + 'px';
+
+                this.appendChild(ripple);
+
+                setTimeout(() => ripple.remove(), 600);
+            });
+        });
+
+        /* =========================================
+           BUTTON PULSE ANIMATION ON SCROLL
+           ========================================= */
+
+        gsap.to('.glow-btn', {
+            scrollTrigger: {
+                trigger: '.glow-btn',
+                start: 'top 80%',
+                toggleActions: 'play none none reverse'
+            },
+            scale: 1.05,
+            duration: 0.3,
+            yoyo: true,
+            repeat: 1,
+            ease: 'power2.inOut'
+        });
+
     </script>
 </body>
 
