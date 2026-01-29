@@ -1,0 +1,19 @@
+{
+  "name": "node-landing",
+  "version": "1.0.0",
+  "description": "Node - Simple, Scalable Web Solutions",
+  "scripts": {
+    "dev": "vercel dev",
+    "build": "echo 'Static site - no build needed'",
+    "deploy": "vercel --prod"
+  },
+  "keywords": ["landing-page", "web-development", "tailwind"],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "vercel": "^33.0.0"
+  },
+  "dependencies": {
+    "resend": "^3.0.0"
+  }
+}

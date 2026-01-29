@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="160" height="160" viewBox="0 0 160 160">
+  <defs>
+    <linearGradient id="iMetal" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#E6E8EC"/>
+      <stop offset="0.5" stop-color="#C9CCD2"/>
+      <stop offset="1" stop-color="#B3B7BE"/>
+    </linearGradient>
+    <filter id="iGlow" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="1.4" result="b"/>
+      <feColorMatrix in="b" type="matrix"
+        values="1 0 0 0 0
+                0 1 0 0 0
+                0 0 1 0 0
+                0 0 0 0.18 0" result="g"/>
+      <feMerge>
+        <feMergeNode in="g"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  <rect width="160" height="160" rx="28" fill="none"/>
+  <g filter="url(#iGlow)" fill="none" stroke="url(#iMetal)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M40 50h30"/>
+    <path d="M40 80h40"/>
+    <path d="M40 110h25"/>
+    <circle cx="112" cy="88" r="20"/>
+    <path d="M112 68v10"/>
+    <path d="M112 108v10"/>
+    <path d="M92 88h10"/>
+    <path d="M122 88h10"/>
+    <path d="M96 72l7 7"/>
+    <path d="M128 104l7 7"/>
+    <path d="M128 72l-7 7"/>
+    <path d="M96 104l7-7"/>
+  </g>
+</svg>

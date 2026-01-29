@@ -1,0 +1,1050 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Node | AI Collaboration Partner</title>
+  <meta name="description"
+    content="Node is a quiet AI collaboration partner for small and medium businesses. Apply, then book a call." />
+
+  <style>
+    :root {
+      --bg: #0B0D10;
+      --bg2: #111318;
+      --text: #EEF1FF;
+      --muted: rgba(230, 232, 236, 0.68);
+      --line: rgba(255, 255, 255, 0.12);
+      --card: rgba(255, 255, 255, 0.04);
+      --card2: rgba(255, 255, 255, 0.06);
+
+      --silver-1: #C9CCD2;
+      --silver-2: #B3B7BE;
+      --mist: #E6E8EC;
+      --graphite: #5A5E66;
+
+      --shadow: 0 22px 80px rgba(0, 0, 0, 0.52);
+      --radius: 18px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      height: 100%;
+    }
+
+    body {
+      margin: 0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      background: radial-gradient(1100px 700px at 18% -10%, rgba(230, 232, 236, 0.12), transparent 60%),
+        radial-gradient(900px 600px at 85% 8%, rgba(201, 204, 210, 0.10), transparent 55%),
+        linear-gradient(180deg, var(--bg2), var(--bg));
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .wrap {
+      max-width: 1140px;
+      margin: 0 auto;
+      padding: 28px 18px 100px;
+    }
+
+    .top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 10px 0 22px;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(14px);
+      background: rgba(11, 13, 16, 0.50);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 650;
+      letter-spacing: 0.2px;
+    }
+
+    .brand img {
+      height: 28px;
+      width: auto;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid rgba(255, 255, 255, 0.10);
+      border-radius: 999px;
+      padding: 9px 12px;
+      color: var(--muted);
+      background: rgba(255, 255, 255, 0.03);
+      font-size: 13px;
+      white-space: nowrap;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 18px;
+      padding-top: 26px;
+    }
+
+    @media (max-width: 940px) {
+      .hero {
+        grid-template-columns: 1fr;
+      }
+
+      .top {
+        position: relative;
+      }
+    }
+
+    h1 {
+      margin: 10px 0 12px;
+      font-size: 46px;
+      line-height: 1.05;
+      letter-spacing: -1px;
+    }
+
+    @media (max-width: 520px) {
+      h1 {
+        font-size: 38px;
+      }
+    }
+
+    .sub {
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.65;
+      margin: 0 0 18px;
+      max-width: 52ch;
+    }
+
+    .card {
+      background: linear-gradient(180deg, var(--card2), var(--card));
+      border: 1px solid rgba(255, 255, 255, 0.10);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card:before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: radial-gradient(800px 220px at 18% 0%, rgba(230, 232, 236, 0.10), transparent 60%),
+        radial-gradient(700px 260px at 90% 20%, rgba(201, 204, 210, 0.08), transparent 55%);
+      opacity: 0.9;
+    }
+
+    .left {
+      padding: 24px;
+      min-height: 460px;
+    }
+
+    .heroMedia {
+      height: 420px;
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.10);
+      background: rgba(255, 255, 255, 0.02);
+      overflow: hidden;
+      position: relative;
+      margin-top: 16px;
+    }
+
+    .heroMedia img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transform: translate3d(0, 0, 0);
+      will-change: transform;
+    }
+
+    .bullets {
+      margin: 18px 0 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: 10px;
+      max-width: 56ch;
+    }
+
+    .bullets li {
+      display: grid;
+      grid-template-columns: 44px 1fr;
+      gap: 12px;
+      align-items: center;
+      padding: 12px 12px;
+      border: 1px solid rgba(255, 255, 255, 0.10);
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.02);
+      color: var(--muted);
+    }
+
+    .bullets strong {
+      color: var(--mist);
+      font-weight: 650;
+    }
+
+    .ico {
+      width: 34px;
+      height: 34px;
+      display: grid;
+      place-items: center;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .ico img {
+      width: 22px;
+      height: 22px;
+      opacity: 0.96;
+    }
+
+    .right {
+      padding: 22px;
+    }
+
+    .formTitle {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+
+    .formTitle h2 {
+      margin: 0;
+      font-size: 18px;
+      letter-spacing: 0.2px;
+    }
+
+    .hint {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.6;
+      margin: 0 0 14px;
+    }
+
+    form {
+      display: grid;
+      gap: 12px;
+    }
+
+    label {
+      display: block;
+      font-size: 13px;
+      color: var(--muted);
+      margin: 0 0 6px;
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.10);
+      border-radius: 12px;
+      padding: 12px 12px;
+      color: var(--mist);
+      outline: none;
+      font-size: 14px;
+    }
+
+    textarea {
+      min-height: 110px;
+      resize: vertical;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      border-color: rgba(230, 232, 236, 0.35);
+      box-shadow: 0 0 0 3px rgba(230, 232, 236, 0.10);
+    }
+
+    .row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    @media (max-width: 520px) {
+      .row {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .btn {
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: 12px;
+      padding: 13px 14px;
+      background: linear-gradient(180deg, rgba(230, 232, 236, 0.18), rgba(255, 255, 255, 0.06));
+      color: var(--mist);
+      font-weight: 650;
+      letter-spacing: 0.2px;
+      cursor: pointer;
+      transition: transform 160ms ease, background 160ms ease, border-color 160ms ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+      border-color: rgba(230, 232, 236, 0.30);
+      background: linear-gradient(180deg, rgba(230, 232, 236, 0.22), rgba(255, 255, 255, 0.07));
+    }
+
+    .btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    .status {
+      display: none;
+      border: 1px solid rgba(255, 255, 255, 0.10);
+      border-radius: 12px;
+      padding: 12px;
+      background: rgba(255, 255, 255, 0.02);
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.5;
+      margin-bottom: 12px;
+    }
+
+    .status.show {
+      display: block;
+    }
+
+    .status.error {
+      border-color: rgba(255, 90, 95, 0.35);
+      color: rgba(255, 90, 95, 0.92);
+    }
+
+    .status.ok {
+      border-color: rgba(230, 232, 236, 0.28);
+      color: rgba(230, 232, 236, 0.92);
+    }
+
+    .hp {
+      position: absolute;
+      left: -9999px;
+      top: auto;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+    }
+
+    .section {
+      margin-top: 90px;
+    }
+
+    .section h3 {
+      margin: 0 0 10px;
+      font-size: 18px;
+      letter-spacing: 0.2px;
+      color: var(--mist);
+    }
+
+    .section p {
+      margin: 0 0 18px;
+      color: var(--muted);
+      line-height: 1.7;
+      max-width: 70ch;
+    }
+
+    .grid3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+
+    @media (max-width: 940px) {
+      .grid3 {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .mini {
+      padding: 18px;
+      min-height: 160px;
+    }
+
+    .mini .k {
+      font-size: 13px;
+      color: var(--muted);
+      margin-top: 10px;
+      line-height: 1.6;
+    }
+
+    .tilt {
+      transform: translate3d(0, 0, 0);
+      will-change: transform;
+      transition: transform 180ms ease;
+    }
+
+    /* Particle System */
+    .particles {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .particle {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      background: radial-gradient(circle, var(--silver-1), transparent);
+      border-radius: 50%;
+      opacity: 0;
+      animation: particleFloat var(--duration) ease-in-out infinite;
+      animation-delay: var(--delay);
+      box-shadow: 0 0 8px rgba(201, 204, 210, 0.4);
+    }
+
+    @keyframes particleFloat {
+      0% {
+        transform: translate(0, 0) scale(0);
+        opacity: 0;
+      }
+
+      10% {
+        opacity: 0.8;
+      }
+
+      50% {
+        opacity: 1;
+      }
+
+      90% {
+        opacity: 0.6;
+      }
+
+      100% {
+        transform: translate(var(--tx), var(--ty)) scale(1.2);
+        opacity: 0;
+      }
+    }
+
+    /* Network Lines */
+    .network-lines {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .network-line {
+      position: absolute;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--silver-2), transparent);
+      opacity: 0;
+      animation: lineGlow 3s ease-in-out infinite;
+      animation-delay: var(--delay);
+      box-shadow: 0 0 4px rgba(179, 183, 190, 0.5);
+    }
+
+    @keyframes lineGlow {
+
+      0%,
+      100% {
+        opacity: 0;
+        transform: scaleX(0);
+      }
+
+      50% {
+        opacity: 0.6;
+        transform: scaleX(1);
+      }
+    }
+
+    /* Silver Badge Shine */
+    .silver-badge {
+      position: relative;
+      background: linear-gradient(135deg, var(--silver-1), var(--silver-2));
+      color: var(--bg);
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(201, 204, 210, 0.3);
+    }
+
+    .silver-badge::before {
+      content: "";
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.8), transparent);
+      animation: shine 3s ease-in-out infinite;
+    }
+
+    @keyframes shine {
+      0% {
+        transform: translateX(-100%) translateY(-100%) rotate(45deg);
+      }
+
+      100% {
+        transform: translateX(100%) translateY(100%) rotate(45deg);
+      }
+    }
+
+    /* Glow Effects */
+    .glow-text {
+      text-shadow: 0 0 20px rgba(201, 204, 210, 0.4), 0 0 40px rgba(201, 204, 210, 0.2);
+    }
+
+    .glow-border {
+      position: relative;
+    }
+
+    .glow-border::after {
+      content: "";
+      position: absolute;
+      inset: -2px;
+      border-radius: inherit;
+      padding: 2px;
+      background: linear-gradient(135deg, var(--silver-1), transparent, var(--silver-2));
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      mask-composite: exclude;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      pointer-events: none;
+    }
+
+    .glow-border:hover::after {
+      opacity: 1;
+    }
+
+    /* Pulse Animation */
+    @keyframes pulse {
+
+      0%,
+      100% {
+        box-shadow: 0 0 0 0 rgba(201, 204, 210, 0.4);
+      }
+
+      50% {
+        box-shadow: 0 0 0 12px rgba(201, 204, 210, 0);
+      }
+    }
+
+    .pulse {
+      animation: pulse 2.5s ease-in-out infinite;
+    }
+
+    /* Floating Animation */
+    @keyframes float {
+
+      0%,
+      100% {
+        transform: translateY(0px);
+      }
+
+      50% {
+        transform: translateY(-12px);
+      }
+    }
+
+    .float {
+      animation: float 4s ease-in-out infinite;
+    }
+
+    /* Gradient Morph */
+    @keyframes gradientMorph {
+
+      0%,
+      100% {
+        background-position: 0% 50%;
+      }
+
+      50% {
+        background-position: 100% 50%;
+      }
+    }
+
+    .morph-bg {
+      background-size: 200% 200%;
+      animation: gradientMorph 8s ease infinite;
+    }
+
+    /* Mouse Trail Particles */
+    .trail-particle {
+      position: fixed;
+      width: 6px;
+      height: 6px;
+      background: radial-gradient(circle, var(--silver-1), transparent);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0;
+      animation: trailFade 0.8s ease-out forwards;
+    }
+
+    @keyframes trailFade {
+      0% {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      100% {
+        opacity: 0;
+        transform: scale(0);
+      }
+    }
+
+    /* Silver Accent Lines */
+    .accent-line {
+      position: absolute;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--silver-1), transparent);
+      opacity: 0;
+      animation: accentSlide 2s ease-in-out forwards;
+    }
+
+    @keyframes accentSlide {
+      0% {
+        opacity: 0;
+        width: 0;
+      }
+
+      50% {
+        opacity: 1;
+      }
+
+      100% {
+        opacity: 0;
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="top">
+    <div class="wrap" style="padding: 0 18px;">
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;">
+        <div class="brand">
+          <img src="./node-logo.svg" alt="Node logo" />
+        </div>
+        <div class="pill">AI collaboration partner for small teams</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <section class="hero">
+      <div class="card left tilt glow-border" data-tilt>
+        <!-- Particle System -->
+        <div class="particles" id="heroParticles"></div>
+        <!-- Network Lines -->
+        <div class="network-lines" id="heroLines"></div>
+
+        <div style="position:relative; z-index:1;">
+          <div class="silver-badge" style="display:inline-flex;">Apply, then book immediately</div>
+          <h1 class="reveal glow-text">Make AI work, quietly.</h1>
+          <p class="sub reveal">
+            You don’t need more tools. You need a system that takes work off your plate.
+            Apply here, and if it’s a fit, you’ll book a call in the next step.
+          </p>
+
+          <ul class="bullets">
+            <li class="reveal">
+              <div class="ico"><img src="./icon-clarity.svg" alt="" /></div>
+              <div><strong>Clarity first.</strong> We map your workflow and find where AI actually saves time.</div>
+            </li>
+            <li class="reveal">
+              <div class="ico"><img src="./icon-execution.svg" alt="" /></div>
+              <div><strong>Execution.</strong> We implement automations, SOPs, and reporting your team can run.</div>
+            </li>
+            <li class="reveal">
+              <div class="ico"><img src="./icon-results.svg" alt="" /></div>
+              <div><strong>Owner-level results.</strong> Fewer fires, faster throughput, better visibility.</div>
+            </li>
+          </ul>
+
+          <div class="heroMedia tilt float" data-parallax>
+            <img src="./hero-network.svg" alt="Node network graphic" />
+          </div>
+        </div>
+      </div>
+
+      <aside class="card right tilt pulse glow-border" data-tilt>
+        <div style="position:relative; z-index:1;">
+          <div class="formTitle">
+            <h2>Application</h2>
+            <div class="pill">2 minutes</div>
+          </div>
+          <p class="hint">Answer honestly. You’ll be redirected to scheduling right after submitting.</p>
+
+          <div id="status" class="status"></div>
+
+          <form id="appForm" autocomplete="on">
+            <div class="hp">
+              <label>Company Website</label>
+              <input type="text" name="website" tabindex="-1" autocomplete="off" />
+            </div>
+
+            <div class="row">
+              <div>
+                <label for="name">Full name</label>
+                <input id="name" name="name" type="text" required placeholder="Jane Smith" />
+              </div>
+              <div>
+                <label for="email">Work email</label>
+                <input id="email" name="email" type="email" required placeholder="jane@company.com" />
+              </div>
+            </div>
+
+            <div class="row">
+              <div>
+                <label for="company">Company</label>
+                <input id="company" name="company" type="text" required placeholder="Acme Services" />
+              </div>
+              <div>
+                <label for="role">Your role</label>
+                <input id="role" name="role" type="text" placeholder="Owner / Ops / GM" />
+              </div>
+            </div>
+
+            <div class="row">
+              <div>
+                <label for="revenue">Annual revenue</label>
+                <select id="revenue" name="revenue" required>
+                  <option value="" selected disabled>Select</option>
+                  <option>Under $250k</option>
+                  <option>$250k–$1M</option>
+                  <option>$1M–$5M</option>
+                  <option>$5M–$20M</option>
+                  <option>$20M+</option>
+                </select>
+              </div>
+              <div>
+                <label for="team">Team size</label>
+                <select id="team" name="team" required>
+                  <option value="" selected disabled>Select</option>
+                  <option>1–3</option>
+                  <option>4–10</option>
+                  <option>11–25</option>
+                  <option>26–50</option>
+                  <option>50+</option>
+                </select>
+              </div>
+            </div>
+
+            <div>
+              <label for="goal">What do you want AI to do for your business?</label>
+              <textarea id="goal" name="goal" required
+                placeholder="Automate inbound leads, reduce admin, improve follow-up, reporting..."></textarea>
+            </div>
+
+            <div>
+              <label for="pain">What’s currently breaking, slow, or messy?</label>
+              <textarea id="pain" name="pain" required placeholder="Where does time leak?"></textarea>
+            </div>
+
+            <div class="row">
+              <div>
+                <label for="budget">Budget comfort</label>
+                <select id="budget" name="budget" required>
+                  <option value="" selected disabled>Select</option>
+                  <option>$500–$1k / mo</option>
+                  <option>$1k–$3k / mo</option>
+                  <option>$3k–$7k / mo</option>
+                  <option>$7k+ / mo</option>
+                </select>
+              </div>
+              <div>
+                <label for="timeline">Timeline</label>
+                <select id="timeline" name="timeline" required>
+                  <option value="" selected disabled>Select</option>
+                  <option>ASAP</option>
+                  <option>2–4 weeks</option>
+                  <option>1–2 months</option>
+                  <option>Exploring</option>
+                </select>
+              </div>
+            </div>
+
+            <button id="submitBtn" class="btn" type="submit">Submit application</button>
+          </form>
+        </div>
+      </aside>
+    </section>
+
+    <section class="section">
+      <h3 class="reveal">How it works</h3>
+      <p class="reveal">A simple sequence. No noise. We diagnose, build, and hand off systems your team can run.</p>
+
+      <div class="grid3">
+        <div class="card mini tilt reveal" data-tilt>
+          <div style="position:relative; z-index:1;">
+            <div class="pill" style="display:inline-flex;">01</div>
+            <div class="k">We map your workflow, identify friction, and pick the highest leverage automations.</div>
+          </div>
+        </div>
+        <div class="card mini tilt reveal" data-tilt>
+          <div style="position:relative; z-index:1;">
+            <div class="pill" style="display:inline-flex;">02</div>
+            <div class="k">We implement the stack: forms, routing, CRM updates, follow-ups, reporting.</div>
+          </div>
+        </div>
+        <div class="card mini tilt reveal" data-tilt>
+          <div style="position:relative; z-index:1;">
+            <div class="pill" style="display:inline-flex;">03</div>
+            <div class="k">You get documentation, ownership, and a clean ops layer that keeps running.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    // ========== PARTICLE SYSTEM ==========
+    function createParticles() {
+      const particlesContainer = document.getElementById('heroParticles');
+      if (!particlesContainer) return;
+
+      const particleCount = 25;
+
+      for (let i = 0; i < particleCount; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+
+        // Random starting position
+        const startX = Math.random() * 100;
+        const startY = Math.random() * 100;
+        particle.style.left = startX + '%';
+        particle.style.top = startY + '%';
+
+        // Random movement
+        const tx = (Math.random() - 0.5) * 200;
+        const ty = (Math.random() - 0.5) * 200;
+        particle.style.setProperty('--tx', tx + 'px');
+        particle.style.setProperty('--ty', ty + 'px');
+
+        // Random duration and delay
+        const duration = 8 + Math.random() * 8;
+        const delay = Math.random() * 5;
+        particle.style.setProperty('--duration', duration + 's');
+        particle.style.setProperty('--delay', delay + 's');
+
+        particlesContainer.appendChild(particle);
+      }
+    }
+
+    // ========== NETWORK LINES ==========
+    function createNetworkLines() {
+      const linesContainer = document.getElementById('heroLines');
+      if (!linesContainer) return;
+
+      const lineCount = 8;
+
+      for (let i = 0; i < lineCount; i++) {
+        const line = document.createElement('div');
+        line.className = 'network-line';
+
+        // Random position and size
+        const top = Math.random() * 100;
+        const left = Math.random() * 80;
+        const width = 20 + Math.random() * 40;
+        const rotation = Math.random() * 360;
+
+        line.style.top = top + '%';
+        line.style.left = left + '%';
+        line.style.width = width + '%';
+        line.style.transform = `rotate(${rotation}deg)`;
+
+        // Random delay
+        const delay = Math.random() * 3;
+        line.style.setProperty('--delay', delay + 's');
+
+        linesContainer.appendChild(line);
+      }
+    }
+
+    // ========== MOUSE TRAIL ==========
+    let mouseTrailTimeout;
+    document.addEventListener('mousemove', (e) => {
+      // Throttle trail creation
+      if (mouseTrailTimeout) return;
+      mouseTrailTimeout = setTimeout(() => {
+        mouseTrailTimeout = null;
+      }, 50);
+
+      // Only create trails on hero section
+      const heroSection = document.querySelector('.hero');
+      if (!heroSection) return;
+
+      const rect = heroSection.getBoundingClientRect();
+      if (e.clientY < rect.top || e.clientY > rect.bottom) return;
+
+      const trail = document.createElement('div');
+      trail.className = 'trail-particle';
+      trail.style.left = e.clientX + 'px';
+      trail.style.top = e.clientY + 'px';
+
+      document.body.appendChild(trail);
+
+      setTimeout(() => {
+        trail.remove();
+      }, 800);
+    });
+
+    // Initialize on page load
+    window.addEventListener('DOMContentLoaded', () => {
+      createParticles();
+      createNetworkLines();
+    });
+
+    // ========== FORM SUBMISSION ==========
+    const ZAPIER_WEBHOOK_URL = "ZAPIER_WEBHOOK_URL_HERE";
+    const CALENDLY_URL = "https://cal.com/alex-c5ns68";
+
+    function buildCalendlyUrl(data) {
+      const url = new URL(CALENDLY_URL);
+      if (data.name) url.searchParams.set("name", data.name);
+      if (data.email) url.searchParams.set("email", data.email);
+      if (data.company) url.searchParams.set("a1", data.company);
+      return url.toString();
+    }
+
+    const form = document.getElementById("appForm");
+    const statusEl = document.getElementById("status");
+    const submitBtn = document.getElementById("submitBtn");
+
+    function setStatus(msg, kind) {
+      statusEl.textContent = msg;
+      statusEl.className = "status show " + (kind || "");
+    }
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const formData = new FormData(form);
+      const payload = Object.fromEntries(formData.entries());
+
+      if (payload.website && payload.website.trim().length > 0) {
+        setStatus("Thanks. Please refresh and try again.", "error");
+        return;
+      }
+
+      submitBtn.disabled = true;
+      setStatus("Submitting…", "");
+
+      payload.page_url = window.location.href;
+      payload.user_agent = navigator.userAgent;
+      payload.timestamp_iso = new Date().toISOString();
+
+      try {
+        const res = await fetch(ZAPIER_WEBHOOK_URL, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload)
+        });
+
+        if (!res.ok) throw new Error("Non-2xx response");
+        setStatus("Submitted. Redirecting to scheduling…", "ok");
+
+        setTimeout(() => {
+          window.location.href = buildCalendlyUrl(payload);
+        }, 800);
+
+      } catch (err) {
+        console.error(err);
+        submitBtn.disabled = false;
+        setStatus("Something didn’t go through. Please try again.", "error");
+      }
+    });
+  </script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+  <script>
+    gsap.registerPlugin(ScrollTrigger);
+
+    gsap.from(".top", {
+      y: -10,
+      opacity: 0,
+      duration: 0.8,
+      ease: "power2.out"
+    });
+
+    gsap.utils.toArray(".reveal").forEach((el, i) => {
+      gsap.from(el, {
+        scrollTrigger: {
+          trigger: el,
+          start: "top 88%",
+          toggleActions: "play none none reverse"
+        },
+        y: 14,
+        opacity: 0,
+        duration: 0.75,
+        ease: "power2.out",
+        delay: Math.min(i * 0.03, 0.18)
+      });
+    });
+
+    const hero = document.querySelector("[data-parallax] img");
+    if (hero) {
+      gsap.to(hero, {
+        y: -26,
+        ease: "none",
+        scrollTrigger: {
+          trigger: "[data-parallax]",
+          start: "top bottom",
+          end: "bottom top",
+          scrub: true
+        }
+      });
+    }
+
+    const tiltCards = document.querySelectorAll("[data-tilt]");
+    tiltCards.forEach((card) => {
+      card.addEventListener("mousemove", (e) => {
+        const r = card.getBoundingClientRect();
+        const x = (e.clientX - r.left) / r.width - 0.5;
+        const y = (e.clientY - r.top) / r.height - 0.5;
+        const rx = (-y * 4).toFixed(2);
+        const ry = (x * 5).toFixed(2);
+        card.style.transform = "perspective(900px) rotateX(" + rx + "deg) rotateY(" + ry + "deg) translateY(-1px)";
+      });
+      card.addEventListener("mouseleave", () => {
+        card.style.transform = "perspective(900px) rotateX(0deg) rotateY(0deg) translateY(0px)";
+      });
+    });
+  </script>
+</body>
+
+</html>
