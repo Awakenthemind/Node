@@ -151,6 +151,39 @@
             background-color: #333333;
             color: #e5e5e5;
         }
+
+        /* Infinite Scrolling Companies */
+        .scroll-container {
+            animation: scroll 40s linear infinite;
+            will-change: transform;
+        }
+
+        .scroll-container:hover {
+            animation-play-state: paused;
+        }
+
+        @keyframes scroll {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        .company-logo {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #525252;
+            white-space: nowrap;
+            transition: color 0.3s ease;
+            user-select: none;
+        }
+
+        .company-logo:hover {
+            color: #a3a3a3;
+        }
     </style>
 </head>
 
@@ -234,6 +267,51 @@
                 </div>
             </div>
         </header>
+
+        <!-- Trusted By Section (Infinite Scroll) -->
+        <section class="relative py-16 bg-gradient-to-b from-black to-node-dark overflow-hidden"
+            aria-label="Trusted by leading companies">
+            <div class="max-w-7xl mx-auto px-4 md:px-6 mb-8">
+                <p class="text-center text-sm text-gray-500 font-medium tracking-wide">TRUSTED BY INNOVATIVE TEAMS</p>
+            </div>
+
+            <!-- Scrolling Container -->
+            <div class="relative">
+                <!-- Gradient Overlays -->
+                <div
+                    class="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-node-dark to-transparent z-10 pointer-events-none">
+                </div>
+                <div
+                    class="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-node-dark to-transparent z-10 pointer-events-none">
+                </div>
+
+                <!-- Scrolling Track -->
+                <div class="scroll-container flex gap-12 items-center">
+                    <!-- First Set -->
+                    <div class="scroll-content flex gap-12 items-center">
+                        <div class="company-logo">Stripe</div>
+                        <div class="company-logo">Vercel</div>
+                        <div class="company-logo">Shopify</div>
+                        <div class="company-logo">Linear</div>
+                        <div class="company-logo">Notion</div>
+                        <div class="company-logo">Figma</div>
+                        <div class="company-logo">Webflow</div>
+                        <div class="company-logo">Framer</div>
+                    </div>
+                    <!-- Duplicate Set for Seamless Loop -->
+                    <div class="scroll-content flex gap-12 items-center" aria-hidden="true">
+                        <div class="company-logo">Stripe</div>
+                        <div class="company-logo">Vercel</div>
+                        <div class="company-logo">Shopify</div>
+                        <div class="company-logo">Linear</div>
+                        <div class="company-logo">Notion</div>
+                        <div class="company-logo">Figma</div>
+                        <div class="company-logo">Webflow</div>
+                        <div class="company-logo">Framer</div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
         <!-- Features Section -->
         <section id="features" class="relative py-32 bg-node-dark" aria-labelledby="features-title">
